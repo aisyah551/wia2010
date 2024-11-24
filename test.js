@@ -1,10 +1,19 @@
-const input = document.getElementById("input");
+const input = document.getElementById("input-arabic-letters");
+const output = document.getElementById("output");
+const joinBtn = document.getElementById("join-btn");
 
-const character = "ش";
-input.textContent = character;
-console.log(character.charCodeAt(0));
 console.log(String.fromCharCode(0x0628, 0x0633, 0x0645));
-const str = String.fromCharCode(0x0628, 0x0633, 0x0645);
-input.textContent = str;
 
-input.style.fontSize = "1.5rem";
+joinBtn.addEventListener("click", () => {
+    console.log(input.value);
+    const inputClean = input.value.split(",").join("");
+    console.log(inputClean);
+
+    output.textContent = inputClean;
+
+    /*with the input from smart glove, 
+    1. create a string or array from the letters
+    2. seperate them
+    3. display them
+    */
+});
