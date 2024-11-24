@@ -1,0 +1,37 @@
+*,
+*::after,
+*::before {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+#alphabet-table {
+    width: 250px;
+    margin: 20px auto 0;
+    text-align: center;
+}
+
+#alphabet-table > div {
+    font-size: 1.2rem;
+    margin-bottom: 12px;
+}
+
+table, tr, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+
+table {
+    width: 200px;
+    margin: 0 auto;
+}
+
+td {
+    text-align: center;
+    padding: 5px;
+}
+
+.first-cell {
+    width: 16.67%;
+}
