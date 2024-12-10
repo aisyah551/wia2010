@@ -56,7 +56,8 @@ h2 {
 
 #output {
     margin: 30px auto 0;
-    text-align: center;
+    display: flex;
+    justify-content: center;
 }
 
 #surah-list, #output {
@@ -100,19 +101,13 @@ h2 {
 .button {
     display: flex;
     align-items: center;
+    justify-content: center;
     padding-right: 10px;
 }
 
-.arrow-circle {
-    height: 25px;
-    width: 25px;
-    color: white;
-    background-color: lightblue;
-    border-radius: 50%;
-    font-weight: bold;
-    font-size: 1.2rem;
-    text-align: center;
-    padding-top: 1px;
+.button i {
+    color: lightblue;
+    font-size: 1.4rem;
 }
 
 .english-name {

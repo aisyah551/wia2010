@@ -1,41 +1,11 @@
-//const input = document.getElementById("input-arabic-letters");
-//const joinBtn = document.getElementById("join-btn");
-
 const surahList = document.getElementById("surah-list");
 const output = document.getElementById("output");
+const inputSurahName = document.getElementById("input-surah-name");
+const searchBtn = document.getElementById("search-btn");
 
 const surahAPI = "http://api.alquran.cloud/v1/surah";
 let surahArray = [];
-let ayahsArray = [];
-
-console.log(String.fromCharCode(0x0628, 0x0633, 0x0645));
-/*const str = "meow";
-console.log(str);
-str.split("").forEach(char => {
-    console.log(char);
-});
-Array.from(str).forEach((char) => {
-    console.log(char);
-});
-
-joinBtn.addEventListener("click", () => {
-    console.log(input.value);
-    const inputClean = input.value.split(",").join("");
-
-    console.log(inputClean);
-
-    /*for (let i = 0; i < inputClean.length; i++) {
-        console.log(inputClean.charCodeAt(i));
-    }*/
-
-    //output.textContent = inputClean;
-
-    /*with the input from smart glove, 
-    1. create a string or array from the letters
-    2. seperate them
-    3. display them
-    */
-//});
+let selectedSurah = {};
 
 const fetchSurah = async () => {
     try {
@@ -45,10 +15,7 @@ const fetchSurah = async () => {
 
         surahArray = surah.data;
         console.log(surahArray);
-        displaySurahList(surahArray);
-
-        const surahName = surahArray[0].englishName;
-        console.log(surahName);
+        displaySurahList();
       
     } catch (err) {
         console.log(err);
@@ -57,39 +24,72 @@ const fetchSurah = async () => {
   
 fetchSurah();
 
-const displaySurahList = (surahArray) => {
-    surahList.innerHTML = surahArray.map(item => {
-        const { number, englishName, englishNameTranslation, name, numberOfAyahs } = item;
+const displaySurahList = () => {
+    surahArray.forEach(surah => {
+        const { number, englishName, englishNameTranslation, name, numberOfAyahs } = surah;
 
-        return `<div class="surah-div" id="${englishName}" onclick="fetchSelectedSurah(${number})">
+        const surahDiv = document.createElement("div");
+        surahDiv.className = "surah-div";
+        surahDiv.id = englishName;
+
+        surahDiv.innerHTML = `
         <div class="surah-details">
+                <p class="surah-name">${number}. <span class="english-name">${englishName}</span> (${name})</p>
+                <p class="english-name-translation">English Translation: ${englishNameTranslation}</p>
+                <p class="number-of-ayahs">Number of Ayahs: ${numberOfAyahs}</p>
+            </div>
+            <div class="button">
+                <i class="fa-solid fa-circle-arrow-right"></i>
+        </div>
+        `
+        surahDiv.addEventListener("click", () => {
+            window.location.href = `surahPage.html?surahNumber=${number}`;
+        });
+
+        surahList.appendChild(surahDiv);
+    });
+}
+
+const searchSurah = (index) => {
+    const { number, englishName, englishNameTranslation, name, numberOfAyahs } = surahArray[index];
+
+    const surahDiv = document.createElement("div");
+    surahDiv.className = "surah-div";
+    surahDiv.id = englishName;
+
+    surahDiv.innerHTML = `
+    <div class="surah-details">
             <p class="surah-name">${number}. <span class="english-name">${englishName}</span> (${name})</p>
             <p class="english-name-translation">English Translation: ${englishNameTranslation}</p>
             <p class="number-of-ayahs">Number of Ayahs: ${numberOfAyahs}</p>
         </div>
         <div class="button">
-            <div class="arrow-circle">></div>
-        </div>
-        </div>`
-    }).join("");
+            <i class="fa-solid fa-circle-arrow-right"></i>
+    </div>
+    `
+    surahDiv.addEventListener("click", () => {
+        window.location.href = `surahPage.html?surahNumber=${number}`;
+    });
+
+    output.appendChild(surahDiv);
 }
 
-const fetchSelectedSurah = async (id) => {
-    try {
-        const selectedSurahAPI = surahAPI + "/" + id.toString();
-        //console.log(selectedSurahAPI);
+searchBtn.addEventListener("click", () => {
+    output.innerHTML = "";
+    const inputValue = inputSurahName.value;
+    let surahIndex;
 
-        const res = await fetch(selectedSurahAPI);
-        const surah = await res.json();
-        ayahsArray = surah.data.ayahs;
-        console.log(ayahsArray);
-        displaySurah();
-
-    } catch (err) {
-        console.log(err);
+    if (!inputValue) {
+        alert("Please enter a Surah name or number!");
     }
-}
+    else {
+        if (isNaN(inputValue)) {
+            surahIndex = surahArray.findIndex(surah => surah.englishName === inputValue)
+        }
+        else {
+            surahIndex = parseInt(inputValue) - 1;
+        }
 
-const displaySurah = () => {
-    ayahsArray.forEach(item => output.innerHTML += `${item.text}<br/>`);
-}
+        searchSurah(surahIndex); 
+    }
+});
