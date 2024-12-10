@@ -1,0 +1,115 @@
+*,
+*::after,
+*::before {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    text-align: center;
+    margin-top: 60px;
+}
+
+#surah-name, #surah-name-translation {
+    text-align: center;
+}
+
+#surah-name {
+    margin-top: 10px;
+}
+
+#display-ayah-div, #ayahs-list-div {
+    width: 450px;
+}
+
+#display-ayah-div {
+    margin: 30px auto 15px;
+    padding: 20px 15px;
+    text-align: center;
+    font-size: 1.55rem;
+    font-weight: bold;
+    background-color: lightblue;
+    border-radius: 20px;
+    word-spacing: 5px;
+    line-height: 1.5;
+}
+
+#sign-div {
+    width: 400px;
+    margin: 40px auto 60px;
+    text-align: center;
+}
+
+#input-sign {
+    width: 380px;
+    height: 50px;
+    text-align: right;
+    font-size: 1.1rem;
+    padding: 0 10px;
+    border-radius: 20px;
+    border: 2px solid lightblue;
+}
+
+#ayahs-list-div h2, #ayahs-list-div h3 {
+    text-align: center;
+    margin-bottom: 5px;
+}
+
+#ayahs-list-div {
+    margin: 30px auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.ayah-div {
+    margin: 5px 0;
+    padding: 15px 12px;
+    border-radius: 20px;
+    border: 1px solid lightblue;
+    text-align: right;
+    font-size: 1.35rem;
+    cursor: pointer;
+}
+
+.ayah-div:hover {
+    background-color: lightblue;
+    opacity: 85%;
+}
+
+.ayah-div:active {
+    opacity: 60%;
+}
+
+#alphabet-table {
+    width: 250px;
+    position: relative;
+    top: -85px;
+    text-align: center;
+}
+
+#alphabet-table > div {
+    font-size: 1.2rem;
+    margin-bottom: 12px;
+}
+
+table, tr, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+
+table {
+    width: 200px;
+    margin: 0 auto;
+}
+
+td {
+    text-align: center;
+    padding: 5px;
+    font-size: 1.2rem;
+}
+
+.first-cell {
+    width: 16.67%;
+}
